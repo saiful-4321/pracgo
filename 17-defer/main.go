@@ -1,4 +1,5 @@
 package main
+
 import "fmt"
 
 func main() {
@@ -10,6 +11,6 @@ func main() {
 
 func myDefer() {
 	for i := 0; i < 5; i++ {
-		defer fmt.Printf("Number is: %v\n",i)
+		defer fmt.Printf("Number is: %v\n", i)
 	}
 }
