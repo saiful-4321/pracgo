@@ -28,4 +28,14 @@ func main() {
 	for _, val := range qparams {
 		fmt.Println("Param is: ", val)
 	}
+
+	partsOfUrl := &url.URL{
+		Scheme:   "https",
+		Host:     "lco.dev",
+		Path:     "/tutcss",
+		RawQuery: "user=Saiful",
+	}
+
+	anotherUrl := partsOfUrl.String()
+	fmt.Println(anotherUrl)
 }
