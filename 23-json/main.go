@@ -16,6 +16,11 @@ type courses struct {
 func main() {
 	fmt.Println("Welcome to json learning world")
 
+	// EncodeJson()
+	DecodeJson()
+}
+
+func EncodeJson() {
 	maincourse := []courses{
 		{"css", 50, "w3school.com", "abc123", []string{"class", "id"}},
 		{"javascript", 500, "w3school.com", "saif4321", []string{"classes", "id", "props", "best"}},
@@ -29,5 +34,39 @@ func main() {
 	}
 
 	fmt.Printf(string(finalJSON))
+}
 
+func DecodeJson() {
+	jsonData := []byte(`
+		{
+			"coursename": "css",
+			"price": 50,
+			"website": "w3school.com",
+			"tags": ["class", "id"]
+		}
+	`)
+
+	var mainCourse courses
+
+	checkValid := json.Valid(jsonData)
+
+	if checkValid {
+		fmt.Println("json is valid")
+		json.Unmarshal(jsonData, &mainCourse)
+		fmt.Printf("%#v\n", mainCourse)
+	} else {
+		fmt.Println("Json was not valid")
+	}
+
+	// data using key value pair
+
+	var myOnlineData map[string]interface{}
+
+	json.Unmarshal(jsonData, &myOnlineData)
+
+	fmt.Printf("%#v\n", myOnlineData)
+
+	for k, v := range myOnlineData {
+		fmt.Printf("key is: %v and value is %v and Type is %T\n", k, v, v)
+	}
 }
