@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+)
 
 // model for course -file
 type Course struct {
@@ -25,4 +29,17 @@ func (c *Course) isEmpty() bool {
 
 func main() {
 	fmt.Println("Welcome to api calling section")
+}
+
+// controllers - file
+
+// serve home route
+func serveHome(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("<h1>Hey wellcome to my world of golang bro.</h1>"))
+}
+
+func getAllCourses(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Getting all the courses")
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(courses)
 }
