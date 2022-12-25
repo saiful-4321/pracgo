@@ -65,3 +65,7 @@ func getCourse(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode("Course not found with the given id")
 	return
 }
+
+func createCourse(w http.ResponseWriter, r *http.Request) {
+
+}
