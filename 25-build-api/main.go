@@ -67,5 +67,7 @@ func getCourse(w http.ResponseWriter, r *http.Request) {
 }
 
 func createCourse(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Insert one specific course")
+	w.Header().Set("Content-Type", "application/json")
 
 }
