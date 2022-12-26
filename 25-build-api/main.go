@@ -119,3 +119,19 @@ func UpdateCourse(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+func deleteCourse(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Deleting a single course from slice")
+	w.Header().Set("Content-Type", "application/json")
+
+	params := mux.Vars(r)
+
+	// loop, id, remove(index, index+1)
+	for index, course := range courses {
+		if course.CourseId == params["id"] {
+			courses = append(courses[:index], courses[index+1:]...)
+			json.NewEncoder(w).Encode("This course has removed successfully")
+			break
+		}
+	}
+}
