@@ -15,7 +15,7 @@ import (
 type Course struct {
 	CourseId     string  `json:"courseid"`
 	CourseName   string  `json:"coursename"`
-	CoursePrice  string  `json:"courseprice"`
+	CoursePrice  int     `json:"courseprice"`
 	CourseAuthor *Author `json:"author"`
 }
 
@@ -35,6 +35,38 @@ func (c *Course) isEmpty() bool {
 
 func main() {
 	fmt.Println("Welcome to api calling section")
+
+	// r := mux.NewRouter()
+
+	// basic seeding
+	InsertBasicSeedingDataIntoSlice()
+}
+
+func InsertBasicSeedingDataIntoSlice() {
+	courses = append(courses, Course{
+		CourseId:     "1",
+		CourseName:   "Javascript",
+		CoursePrice:  400,
+		CourseAuthor: &Author{Fullname: "Saiful Islam", Website: "basicjs.com"},
+	})
+	courses = append(courses, Course{
+		CourseId:     "2",
+		CourseName:   "Python",
+		CoursePrice:  600,
+		CourseAuthor: &Author{Fullname: "Saiful Islam", Website: "basicpython.com"},
+	})
+	courses = append(courses, Course{
+		CourseId:     "3",
+		CourseName:   "Laravel",
+		CoursePrice:  900,
+		CourseAuthor: &Author{Fullname: "Saiful Islam", Website: "basiclaravel.com"},
+	})
+	courses = append(courses, Course{
+		CourseId:     "4",
+		CourseName:   "PHP",
+		CoursePrice:  200,
+		CourseAuthor: &Author{Fullname: "Nusaifa Islam", Website: "basicphp.com"},
+	})
 }
 
 // controllers - file
@@ -59,7 +91,7 @@ func getCourse(w http.ResponseWriter, r *http.Request) {
 
 	// loop courses, find specific course by id and return it
 
-	for _, course := range params {
+	for _, course := range courses {
 		if course.CourseId == params["id"] {
 			json.NewEncoder(w).Encode(course)
 			return
