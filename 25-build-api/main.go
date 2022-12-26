@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	"strconv"
@@ -36,10 +37,21 @@ func (c *Course) isEmpty() bool {
 func main() {
 	fmt.Println("Welcome to api calling section")
 
-	// r := mux.NewRouter()
-
 	// basic seeding
 	InsertBasicSeedingDataIntoSlice()
+
+	r := mux.NewRouter()
+
+	// routing
+	r.HandleFunc("/", serveHome).Methods("GET")
+	r.HandleFunc("/courses", getAllCourses).Methods("GET")
+	r.HandleFunc("/course/{id}", getCourse).Methods("GET")
+	r.HandleFunc("/course", createCourse).Methods("POST")
+	r.HandleFunc("/course/{id}", UpdateCourse).Methods("PUT")
+	r.HandleFunc("/course/{id}", deleteCourse).Methods("DELETE")
+
+	// listen to a port
+	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
 func InsertBasicSeedingDataIntoSlice() {
