@@ -14,5 +14,6 @@ var collection *mongo.Collection
 // Connect with mongo db
 func init() {
 	//  client option
+	clientOption := options.client().ApplyURI(connectionString)
 
 }
